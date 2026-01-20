@@ -1,0 +1,310 @@
+.home-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f5 100%);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+.home-logo {
+    width: 220px;
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto 1.5rem;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.pin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Hero Section */
+.home-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    color: #1a202c;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.hero-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(66, 153, 225, 0.15);
+    border: 3px solid #bee3f8;
+}
+
+.hero-icon svg {
+    width: 60px;
+    height: 60px;
+    color: #4299e1;
+}
+
+.home-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    color: #2d3748;
+}
+
+.home-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #718096;
+    margin: 0;
+}
+
+/* Actions Grid */
+.home-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    width: 100%;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* Action Cards */
+.action-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #cbd5e0, #a0aec0);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: #cbd5e0;
+}
+
+.action-card:hover::before {
+    transform: scaleX(1);
+}
+
+.action-card:active {
+    transform: translateY(-4px);
+}
+
+/* Action Icon */
+.action-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.action-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.add-icon {
+    background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+    color: #4299e1;
+    border: 1px solid #bee3f8;
+}
+
+.data-icon {
+    background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
+    color: #f6ad55;
+    border: 1px solid #fbd38d;
+}
+
+.action-card:hover .action-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Action Images - Optical related graphics */
+.action-image {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 80px;
+    height: 80px;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+.action-image svg {
+    width: 100%;
+    height: 100%;
+    color: #4299e1;
+}
+
+.action-card:hover .action-image {
+    opacity: 0.15;
+}
+
+.action-card[onclick*="CustomerData"] .action-image svg {
+    color: #f6ad55;
+}
+
+/* Action Content */
+.action-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+}
+
+.action-description {
+    font-size: 1rem;
+    color: #718096;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 1.5rem;
+    }
+
+    .hero-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .hero-icon svg {
+        width: 50px;
+        height: 50px;
+    }
+
+    .home-title {
+        font-size: 2.5rem;
+    }
+
+    .home-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .action-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .home-actions {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
+    }
+
+    .action-card {
+        padding: 2rem;
+    }
+
+    .action-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-container {
+        padding: 1rem;
+    }
+
+    .home-hero {
+        margin-bottom: 2.5rem;
+    }
+
+    .hero-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .home-title {
+        font-size: 2rem;
+    }
+
+    .home-subtitle {
+        font-size: 1rem;
+    }
+
+    .action-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .action-card {
+        padding: 1.5rem;
+    }
+
+    .action-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .action-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+}

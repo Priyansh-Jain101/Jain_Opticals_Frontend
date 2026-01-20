@@ -1,0 +1,395 @@
+.add-customer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+.add-customer h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.add-customer form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form field groups */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.add-customer label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 0.25rem;
+}
+
+.add-customer label .required {
+    color: #e53e3e;
+    font-weight: 700;
+    margin-left: 2px;
+}
+
+.add-customer input[type="text"],
+.add-customer input[type="number"],
+.add-customer select {
+    padding: 0.75rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+    color: #1a1a1a;
+}
+
+.add-customer input[type="text"]:focus,
+.add-customer input[type="number"]:focus,
+.add-customer select:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* ------------------------------------------------------------------ */
+/*  TABLE WRAPPER - Horizontal scrolling for ALL small devices         */
+/* ------------------------------------------------------------------ */
+.table-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 1rem auto;
+
+    overflow-x: auto;               /*  horizontal scroll */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    border-radius: 12px;            /*  radius on wrapper (not table) */
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Table styling */
+.add-customer table {
+    width: 100%;
+    min-width: 650px;               /*  forces overflow → scroll */
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: transparent;
+
+    /* ❌ do NOT restrict table, let wrapper handle it */
+    max-width: none;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
+}
+
+.add-customer thead {
+    background-color: #2d3748;
+    color: #ffffff;
+}
+
+/* Optional: Keep header visible on scroll (works well on mobile) */
+.add-customer thead {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+}
+
+.add-customer th {
+    padding: 1rem 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.025em;
+    box-sizing: border-box;
+}
+
+/* Sticky first column */
+.add-customer th:first-child {
+    padding-left: 1rem;
+    position: sticky;
+    left: 0;
+    z-index: 25;
+    background-color: #2d3748;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-customer th:last-child {
+    padding-right: 1rem;
+}
+
+.add-customer tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.15s ease;
+}
+
+.add-customer tbody tr:last-child {
+    border-bottom: none;
+}
+
+.add-customer tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.add-customer td {
+    padding: 0.75rem;
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #4a5568;
+    box-sizing: border-box;
+}
+
+/* Sticky first column body */
+.add-customer td:first-child {
+    padding-left: 1rem;
+    position: sticky;
+    left: 0;
+    z-index: 18;
+    font-weight: 600;
+    color: #2d3748;
+    background-color: #edf2f7;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.add-customer td:last-child {
+    padding-right: 1rem;
+}
+
+.add-customer td input[type="text"] {
+    width: calc(100% - 1rem);
+    max-width: 100%;
+    padding: 0.5rem;
+    border: 1.5px solid #cbd5e0;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.add-customer td input[type="text"]:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.1);
+}
+
+/* Item bought and prices row */
+.item-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Amount fields row */
+.amount-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Service field - single field above buttons */
+.service-field {
+    max-width: 400px;
+    margin-top: 0.5rem;
+}
+
+/* Button styles - buttons at the end of form */
+.add-customer form > button {
+    margin-top: 1.5rem;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    min-width: 140px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-self: flex-end;
+}
+
+.add-customer form > button:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.add-customer form > button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Primary button (Add Customer - submit) */
+.add-customer form button[type="submit"] {
+    background-color: #4299e1;
+    color: #ffffff;
+}
+
+.add-customer form button[type="submit"]:hover {
+    background-color: #3182ce;
+    box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+}
+
+.add-customer form button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+/* Secondary button (Cancel) */
+.add-customer form button[type="button"] {
+    background-color: #e2e8f0;
+    color: #2d3748;
+}
+
+.add-customer form button[type="button"]:hover {
+    background-color: #cbd5e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.add-customer form button[type="button"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(226, 232, 240, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .add-customer {
+        padding: 1.5rem;
+    }
+
+    .form-row,
+    .item-row,
+    .amount-row {
+        grid-template-columns: 1fr;
+    }
+
+    .table-wrapper {
+        margin: 1rem 0;
+        max-width: 100%;
+    }
+
+    .add-customer table {
+        min-width: 650px; /*  keep scroll */
+    }
+
+    .service-field {
+        max-width: 100%;
+    }
+
+    .add-customer form > button {
+        width: 100%;
+        min-width: auto;
+        margin-right: 0 !important;
+        margin-top: 0.75rem;
+        align-self: stretch;
+    }
+
+    .add-customer form > button:first-of-type {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Samsung S24 and similar small devices (360px - 390px) */
+@media (max-width: 390px) {
+    .add-customer {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .add-customer h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    .add-customer form {
+        gap: 1rem;
+    }
+
+    .form-row,
+    .item-row,
+    .amount-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .add-customer label {
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .add-customer input[type="text"],
+    .add-customer input[type="number"],
+    .add-customer select {
+        padding: 0.625rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+    }
+
+    .service-field {
+        max-width: 100%;
+    }
+
+    .add-customer form > button {
+        width: 100%;
+        min-width: auto;
+        margin-right: 0 !important;
+        margin-top: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9375rem;
+        align-self: stretch;
+    }
+
+    .add-customer form > button:first-of-type {
+        margin-top: 1.5rem;
+    }
+
+    /*  Ensure horizontal scrolling always works */
+    .table-wrapper {
+        margin: 1rem 0;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .add-customer table {
+        min-width: 650px; /*  force scroll */
+    }
+}
+
+/* ----------------------- OPTIONAL IMAGE PREVIEW CSS ----------------------- */
+.image-preview {
+    margin-top: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 0.75rem;
+    background: #f9fafb;
+    display: flex;
+    justify-content: center;
+}
+
+.image-preview img {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 12px;
+}

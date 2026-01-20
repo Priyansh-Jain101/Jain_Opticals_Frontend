@@ -1,0 +1,395 @@
+.customer-data-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f5 100%);
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+.back-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #e2e8f0;
+    color: #2d3748;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #cbd5e0;
+    transform: translateX(-2px);
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.loading, .no-customers {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.125rem;
+    color: #718096;
+}
+
+/* Customers Grid */
+.customers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); /*  smaller than 600px */
+    gap: 1.5rem; /*  smaller gap */
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Customer Card */
+.customer-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.25rem; /*  smaller padding */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.customer-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+/* Date and Customer ID + Service Badge Header */
+.customer-header {
+    margin-bottom: 1.5rem; /*  smaller */
+    padding-bottom: 1rem; /*  smaller */
+    border-bottom: 2px solid #e2e8f0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.date-id-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.date-label, .customer-id-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #718096;
+}
+
+.date-value, .customer-id-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-left: 0.5rem;
+}
+
+.customer-id-value {
+    color: #4299e1;
+    font-family: 'Courier New', monospace;
+}
+
+/*  Service badge top-right */
+.service-top-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.service-badge {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+    border: 1px solid transparent;
+}
+
+/*  In-progress = GREEN */
+.service-badge.in-progress {
+    background-color: #f0fff4;
+    color: #38a169;
+    border-color: #9ae6b4;
+}
+
+/*  Completed = BLUE */
+.service-badge.completed {
+    background-color: #ebf8ff;
+    color: #3182ce;
+    border-color: #90cdf4;
+}
+
+/*  Optional if service missing */
+.service-badge.pending {
+    background-color: #edf2f7;
+    color: #4a5568;
+    border-color: #cbd5e0;
+}
+
+/* Customer Sections */
+.customer-section {
+    margin-bottom: 2rem;
+}
+
+.customer-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.info-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #718096;
+}
+
+.info-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2d3748;
+}
+
+.info-value.amount {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.info-value.amount-paid {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #38a169;
+}
+
+.info-value.amount-due {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #e53e3e;
+}
+
+/* Eye Test Table */
+.eye-test-table {
+    overflow-x: auto;
+}
+
+.eye-test-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.eye-test-table thead {
+    background-color: #2d3748;
+    color: #ffffff;
+}
+
+.eye-test-table th {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.eye-test-table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.eye-test-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.eye-test-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.eye-test-table td {
+    padding: 0.75rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #4a5568;
+}
+
+.eye-test-table td:first-child {
+    font-weight: 600;
+    color: #2d3748;
+    background-color: #edf2f7;
+}
+
+.info-phone-link {
+  color: #2563eb;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.info-phone-link:hover {
+  text-decoration: underline;
+  color: #2ecb71;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .customer-data-container {
+        padding: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .customers-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .customer-card {
+        padding: 1.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-item.full-width {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .customer-data-container {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .customer-card {
+        padding: 1.25rem;
+    }
+
+    .section-title {
+        font-size: 1.125rem;
+    }
+
+    .customer-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .service-top-right {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Search bar just below Customer Data heading */
+.search-bar {
+  width: 100%;
+  max-width: 900px;           /* matches your layout width */
+  margin: 0 auto 1.5rem;      /* center + spacing below */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Long input */
+.search-input {
+  flex: 1;                    /* makes it take max space */
+  padding: 0.75rem 1rem;      /* same feel as your inputs */
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  transition: all 0.2s ease;
+}
+
+/* Focus effect similar to your form inputs */
+.search-input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* Blue search button */
+.search-btn {
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #4299e1;  /* same as submit */
+  color: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  background-color: #3182ce;
+  box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+}
+
+.search-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+/* Responsive (mobile) */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .search-input,
+  .search-btn {
+    width: 100%;
+  }
+}
