@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../static/CustomerData.css';
+import { formatedDate } from '../utils/FormateDate.js';
 import { API_URL } from "../config";
-
-
 
 
 function CustomerData() {
@@ -109,7 +108,7 @@ function CustomerData() {
                                 <div className="customer-header">
                                     <div className="date-id-section">
                                         <div className="date-label">
-                                            Date: <span className="date-value">{customer.date || 'N/A'}</span>
+                                            Date: <span className="date-value">{formatedDate(customer.date) || 'N/A'}</span>
                                         </div>
                                         {/* <div className="customer-id-label">
                                             Customer ID: <span className="customer-id-value">{customer.customerId || customer._id}</span>
@@ -144,7 +143,7 @@ function CustomerData() {
                                                 className="info-value info-phone-link"
                                                 href={`tel:${String(customer.phone_no).replace(/\s|-/g, "")}`}
                                                 >
-                                                +91-{customer.phone_no}
+                                                {customer.phone_no}
                                                 </a>
                                             ) : (
                                                 <span className="info-value">N/A</span>

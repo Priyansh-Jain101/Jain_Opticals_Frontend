@@ -3,7 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../static/IndividualCustomer.css";
 import TableOutput from "./TableOutput.jsx";
 import PinModal from "./PinModal.jsx";
+import { formatedDate } from "../utils/FormateDate.js";
 import { API_URL } from "../config";
+
 
 function IndividualCustomer() {
   const { id } = useParams();
@@ -24,9 +26,14 @@ function IndividualCustomer() {
 
   async function fetchCustomer() {
     try {
+      // Production use API_URL
       const res = await fetch(
         `${API_URL}/jain_opticals/customer/${id}`
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`
+      // );
 
       if (!res.ok) throw new Error("Failed to fetch customer");
 
@@ -49,12 +56,20 @@ function IndividualCustomer() {
   //  Actual delete function (runs after PIN verified)
   async function deleteCustomer() {
     try {
+      // Production use API_URL
       const res = await fetch(
         `${API_URL}/jain_opticals/customer/${id}`,
         {
           method: "DELETE",
         }
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`,
+      //   {
+      //     method: "DELETE",
+      //   }
+      // );
 
       if (!res.ok) throw new Error("Failed to delete customer");
 
@@ -109,7 +124,7 @@ function IndividualCustomer() {
             <div className="ic-date-id">
               <div className="ic-date-label">
                 Date:{" "}
-                <span className="ic-date-value">{customer.date || "N/A"}</span>
+                <span className="ic-date-value">{formatedDate(customer.date) || "N/A"}</span>
               </div>
 
               <div className="ic-id-label">
@@ -156,7 +171,7 @@ function IndividualCustomer() {
                     className="ic-phone-link"
                     href={`tel:${String(customer.phone_no).replace(/\s|-/g, "")}`}
                   >
-                    +91-{customer.phone_no}
+                    {customer.phone_no}
                   </a>
                 ) : (
                   <span className="ic-value">N/A</span>

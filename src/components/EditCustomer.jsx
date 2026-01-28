@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import TableEdit from "./TableEdit.jsx";
 import { API_URL } from "../config";
 
+//  MUI DATE PICKER
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import dayjs from "dayjs";
+
 function EditCustomer() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,6 +29,7 @@ function EditCustomer() {
     dueAmount: "",
     customerService: "In-Progress",
     customerId: "",
+    date: "", //  NEW FIELD
 
     prescriptions: {
       old: {
@@ -56,9 +63,14 @@ function EditCustomer() {
 
   async function fetchCustomer() {
     try {
+      // Production: use API_URL
       const res = await fetch(
         `${API_URL}/jain_opticals/customer/${id}`
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`
+      // );
 
       if (!res.ok) throw new Error("Failed to fetch customer data");
 
@@ -78,6 +90,11 @@ function EditCustomer() {
         dueAmount: customer.dueAmount || "",
         customerService: customer.customerService || "In-Progress",
         customerId: customer.customerId || "",
+
+        //  LOAD DATE
+        date: customer?.date
+          ? dayjs(customer.date).format("YYYY-MM-DD")
+          : "",
 
         prescriptions: {
           old: {
@@ -136,6 +153,14 @@ function EditCustomer() {
       alert("Error fetching customer data");
       setLoading(false);
     }
+  }
+
+  //  CALENDAR CHANGE HANDLER
+  function handleDateChange(newValue) {
+    setFormData((prev) => ({
+      ...prev,
+      date: dayjs(newValue).format("YYYY-MM-DD"),
+    }));
   }
 
   //  handle image selection
@@ -208,6 +233,7 @@ function EditCustomer() {
       fd.append("dueAmount", formData.dueAmount);
 
       fd.append("customerService", formData.customerService);
+      fd.append("date", formData.date);   //  ADD THIS LINE
 
       fd.append("prescriptions", JSON.stringify(formData.prescriptions));
 
@@ -216,6 +242,7 @@ function EditCustomer() {
         fd.append("image", imageFile);
       }
 
+      // Production: use API_URL
       const res = await fetch(
         `${API_URL}/jain_opticals/customer/${id}`,
         {
@@ -223,6 +250,14 @@ function EditCustomer() {
           body: fd, //  no headers
         }
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`,
+      //   {
+      //     method: "PUT",
+      //     body: fd, //  no headers
+      //   }
+      // );
 
       const raw = await res.text();
       let data;
@@ -442,24 +477,36 @@ function EditCustomer() {
             </select>
           </div>
 
-          {/*  IMAGE SHOW + UPLOAD */}
+          {/*  CALENDAR BELOW SERVICE (LEFT SIDE) */}
           <div className="form-field">
+            <label>Order Date</label>
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateCalendar
+                value={formData.date ? dayjs(formData.date) : null}
+                onChange={handleDateChange}
+              />
+            </LocalizationProvider>
+          </div>
+
+          {/*  IMAGE SHOW + UPLOAD */}
+          {/* <div className="form-field">
             <label>
               Order Image{" "}
               <span style={{ fontWeight: "500", color: "#6b7280" }}>
                 (Upload to replace)
               </span>
-            </label>
+            </label> */}
 
             {/* Existing Image */}
-            {existingImageUrl && !imagePreview && (
+            {/* {existingImageUrl && !imagePreview && (
               <div className="image-preview">
                 <img src={existingImageUrl} alt="customer" />
               </div>
-            )}
+            )} */}
 
             {/* New preview */}
-            {imagePreview && (
+            {/* {imagePreview && (
               <div className="image-preview">
                 <img src={imagePreview} alt="new preview" />
               </div>
@@ -471,7 +518,7 @@ function EditCustomer() {
               capture="environment"
               onChange={handleImageChange}
             />
-          </div>
+          </div> */}
 
           <button type="submit">Update Customer</button>
           <button type="button" onClick={handleCancel}>

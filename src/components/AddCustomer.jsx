@@ -4,6 +4,12 @@ import { useState } from "react";
 import TableInput from "./TableInput.jsx";
 import { API_URL } from "../config";
 
+//  MUI DATE PICKER
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import dayjs from "dayjs";
+
 
 function AddCustomer() {
   const navigate = useNavigate();
@@ -21,6 +27,7 @@ function AddCustomer() {
     dueAmount: "",
     customerService: "In-Progress",
     customerId: "",
+    date: "", //  NEW FIELD
     prescriptions: {
       old: {
         right: { sph: "", cyl: "", axis: "", vis: "" },
@@ -78,6 +85,14 @@ function AddCustomer() {
     });
   }
 
+  //  CALENDAR CHANGE HANDLER
+  function handleDateChange(newValue) {
+    setFormData((prev) => ({
+      ...prev,
+      date: dayjs(newValue).format("YYYY-MM-DD"),
+    }));
+  }
+
   //  MUST BE CONNECTED
   function handleImageChange(e) {
     const file = e.target.files?.[0];
@@ -108,6 +123,7 @@ function AddCustomer() {
       fd.append("dueAmount", formData.dueAmount);
 
       fd.append("customerService", formData.customerService);
+      fd.append("date", formData.date);   //  ADD THIS LINE
 
       //  send nested object as JSON string
       fd.append("prescriptions", JSON.stringify(formData.prescriptions));
@@ -122,6 +138,11 @@ function AddCustomer() {
         method: "POST",
         body: fd,
       });
+
+      // const res = await fetch("http://localhost:8080/jain_opticals/add_customer", {
+      //   method: "POST",
+      //   body: fd,
+      // });
 
       const raw = await res.text();
       console.log("RAW RESPONSE:", raw);
@@ -314,8 +335,20 @@ function AddCustomer() {
             </select>
           </div>
 
+          {/*  CALENDAR BELOW SERVICE (LEFT SIDE) */}
+          <div className="form-field">
+          <label>Order Date</label>
+          
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateCalendar
+                value={formData.date ? dayjs(formData.date) : null}
+                onChange={handleDateChange}
+                />
+            </LocalizationProvider>
+          </div>
+
         {/*  Upload Image */}
-        <div className="form-field">
+        {/* <div className="form-field">
           <label>Upload Order Image</label>
           <input
             type="file"
@@ -329,7 +362,7 @@ function AddCustomer() {
               <img src={imagePreview} alt="preview" />
             </div>
           )}
-        </div>
+        </div> */}
 
         <button type="submit">Add Customer</button>
         <button type="button" onClick={handleCancel}>
