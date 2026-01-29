@@ -27,13 +27,13 @@ function IndividualCustomer() {
   async function fetchCustomer() {
     try {
       // Production use API_URL
-      // const res = await fetch(
-      //   `${API_URL}/jain_opticals/customer/${id}`
-      // );
-
       const res = await fetch(
-        `http://localhost:8080/jain_opticals/customer/${id}`
+        `${API_URL}/jain_opticals/customer/${id}`
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`
+      // );
 
       if (!res.ok) throw new Error("Failed to fetch customer");
 
@@ -57,19 +57,19 @@ function IndividualCustomer() {
   async function deleteCustomer() {
     try {
       // Production use API_URL
-      // const res = await fetch(
-      //   `${API_URL}/jain_opticals/customer/${id}`,
-      //   {
-      //     method: "DELETE",
-      //   }
-      // );
-
       const res = await fetch(
-        `http://localhost:8080/jain_opticals/customer/${id}`,
+        `${API_URL}/jain_opticals/customer/${id}`,
         {
           method: "DELETE",
         }
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`,
+      //   {
+      //     method: "DELETE",
+      //   }
+      // );
 
       if (!res.ok) throw new Error("Failed to delete customer");
 

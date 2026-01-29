@@ -64,13 +64,13 @@ function EditCustomer() {
   async function fetchCustomer() {
     try {
       // Production: use API_URL
-      // const res = await fetch(
-      //   `${API_URL}/jain_opticals/customer/${id}`
-      // );
-
       const res = await fetch(
-        `http://localhost:8080/jain_opticals/customer/${id}`
+        `${API_URL}/jain_opticals/customer/${id}`
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`
+      // );
 
       if (!res.ok) throw new Error("Failed to fetch customer data");
 
@@ -243,21 +243,21 @@ function EditCustomer() {
       }
 
       // Production: use API_URL
-      // const res = await fetch(
-      //   `${API_URL}/jain_opticals/customer/${id}`,
-      //   {
-      //     method: "PUT",
-      //     body: fd, //  no headers
-      //   }
-      // );
-
       const res = await fetch(
-        `http://localhost:8080/jain_opticals/customer/${id}`,
+        `${API_URL}/jain_opticals/customer/${id}`,
         {
           method: "PUT",
           body: fd, //  no headers
         }
       );
+
+      // const res = await fetch(
+      //   `http://localhost:8080/jain_opticals/customer/${id}`,
+      //   {
+      //     method: "PUT",
+      //     body: fd, //  no headers
+      //   }
+      // );
 
       const raw = await res.text();
       let data;

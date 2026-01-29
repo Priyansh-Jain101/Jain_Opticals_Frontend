@@ -134,15 +134,15 @@ function AddCustomer() {
       }
 
       //  VERY IMPORTANT: DO NOT SEND JSON HEADERS
-      // const res = await fetch(`${API_URL}/jain_opticals/add_customer`, {
-      //   method: "POST",
-      //   body: fd,
-      // });
-
-      const res = await fetch("http://localhost:8080/jain_opticals/add_customer", {
+      const res = await fetch(`${API_URL}/jain_opticals/add_customer`, {
         method: "POST",
         body: fd,
       });
+
+      // const res = await fetch("http://localhost:8080/jain_opticals/add_customer", {
+      //   method: "POST",
+      //   body: fd,
+      // });
 
       const raw = await res.text();
       console.log("RAW RESPONSE:", raw);

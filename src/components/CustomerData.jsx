@@ -24,9 +24,9 @@ function CustomerData() {
     async function fetchCustomers() {
         try {
             // Production API call
-            // const res = await fetch(`${API_URL}/jain_opticals/customers`);
+            const res = await fetch(`${API_URL}/jain_opticals/customers`);
 
-            const res = await fetch("http://localhost:8080/jain_opticals/customers");
+            // const res = await fetch("http://localhost:8080/jain_opticals/customers");
             if (!res.ok) throw new Error("Failed to fetch customers");
             const data = await res.json();
             setCustomers(data);
@@ -52,17 +52,17 @@ function CustomerData() {
 
         try {
             // Production API call
-            // const res = await fetch(`${API_URL}/jain_opticals/search_customer`, {
-            // method: "POST",
-            // headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify({ phone_no: searchPhone }),
-            // });
-
-            const res = await fetch("http://localhost:8080/jain_opticals/search_customer", {
+            const res = await fetch(`${API_URL}/jain_opticals/search_customer`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ phone_no: searchPhone }),
             });
+
+            // const res = await fetch("http://localhost:8080/jain_opticals/search_customer", {
+            // method: "POST",
+            // headers: { "Content-Type": "application/json" },
+            // body: JSON.stringify({ phone_no: searchPhone }),
+            // });
 
             const data = await res.json();
 
