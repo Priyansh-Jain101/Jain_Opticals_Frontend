@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../static/CustomerData.css';
 import { formatedDate } from '../utils/FormateDate.js';
+import BillTemplate from './BillTemplate.jsx';
+import html2canvas from "html2canvas";
+
+
 import { API_URL } from "../config";
 
 
@@ -11,13 +15,18 @@ function CustomerData() {
     const [searchPhone, setSearchPhone] = useState("");
     const navigate = useNavigate();
 
+    const[selectedCustomer, setSelectedCustomer] = useState(null);
+
     useEffect(() => {
         fetchCustomers();
     }, []);
 
     async function fetchCustomers() {
         try {
-            const res = await fetch(`${API_URL}/jain_opticals/customers`);
+            // Production API call
+            // const res = await fetch(`${API_URL}/jain_opticals/customers`);
+
+            const res = await fetch("http://localhost:8080/jain_opticals/customers");
             if (!res.ok) throw new Error("Failed to fetch customers");
             const data = await res.json();
             setCustomers(data);
@@ -42,7 +51,14 @@ function CustomerData() {
         if (!searchPhone.trim()) return;
 
         try {
-            const res = await fetch(`${API_URL}/jain_opticals/search_customer`, {
+            // Production API call
+            // const res = await fetch(`${API_URL}/jain_opticals/search_customer`, {
+            // method: "POST",
+            // headers: { "Content-Type": "application/json" },
+            // body: JSON.stringify({ phone_no: searchPhone }),
+            // });
+
+            const res = await fetch("http://localhost:8080/jain_opticals/search_customer", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ phone_no: searchPhone }),
@@ -71,6 +87,44 @@ function CustomerData() {
             </div>
         );
     }
+const generateAndSaveBill = async (phone_no) => {
+
+  const billElement = document.getElementById("bill-area");
+
+  if (!billElement) {
+    alert("Bill template not found");
+    return;
+  }
+
+  const canvas = await html2canvas(billElement, {
+    scale: 3,
+    backgroundColor: "#ffffff"
+  });
+
+  canvas.toBlob((blob) => {
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "jain-opticals-bill.png";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+    /* Open WhatsApp after save */
+    const message = "Your Billing Information";
+    window.open(
+        `https://wa.me/91${phone_no}?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
+
+  }, "image/png");
+};
+
+
 
     return (
         <>
@@ -100,6 +154,8 @@ function CustomerData() {
                         <p>No customer data available</p>
                     </div>
                 ) : (
+
+                    <>
                     <div className="customers-grid">
                         {customers.map((customer) => (
                             <div key={customer._id} className="customer-card" onClick={()=> handleChange(customer._id)}>
@@ -155,8 +211,22 @@ function CustomerData() {
                                             <br />
                                             <span className="info-value">{customer.totalAmount || 'N/A'}</span>
                                         </div>
+
                                     </div>
                                 </div>
+
+                                <button className="share-btn" onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedCustomer(customer);
+                                    setTimeout(() => {
+                                        generateAndSaveBill(customer.phone_no);
+                                    }, 100);
+                                    }}
+                                >
+                                    <i class="fa-solid fa-share"></i>
+                                </button>
+                                
+
 
                                 {/* Eye Test Results
                                 <div className="customer-section">
@@ -233,6 +303,19 @@ function CustomerData() {
                             </div>
                         ))}
                     </div>
+
+                    {/* Hidden bill template for image generation */}
+                    {selectedCustomer && (
+                        <div style={{
+                            position: "absolute",
+                            left: "-9999px",
+                            top: "0"
+                        }}>
+                            <BillTemplate customer={selectedCustomer} />
+                        </div>
+                    )}
+
+                    </>
                 )}
             </div>
         </>

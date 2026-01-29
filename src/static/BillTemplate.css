@@ -1,0 +1,111 @@
+/* ========== PAGE SETUP ========== */
+
+#bill-area {
+  width: 794px;                 /* A4 width */
+  min-height: 1123px;           /* A4 height */
+  padding: 60px 70px;
+  /* background: #ffffff; */
+  background-color:#f7fafc;
+  color: #000;
+  font-family: "Arial", Georgia, serif;
+  box-sizing: border-box;
+}
+
+/* ========== HEADER SECTION ========== */
+
+.bill-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.bill-logo {
+  width: 140px;
+  margin-bottom: 12px;
+}
+
+.bill-company h1 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.bill-company .tagline {
+  font-size: 14px;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.bill-company .shop-address {
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.bill-company .shop-phone {
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+/* ========== SPACING BLOCKS ========== */
+
+.spacer-lg {
+  height: 40px;
+}
+
+.spacer-md {
+  height: 25px;
+}
+
+.spacer-sm {
+  height: 15px;
+}
+
+/* ========== DATE ROW ========== */
+
+.bill-date-row {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 16px;
+}
+
+/* ========== CUSTOMER DETAILS ========== */
+
+.bill-details {
+  margin-top: 25px;
+  font-size: 18px;
+}
+
+.bill-details div {
+  margin-bottom: 14px;
+}
+
+/* ========== PAYMENT (RIGHT SIDE) ========== */
+
+.bill-payment {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ========== FOOTER ========== */
+
+.bill-footer {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.bill-footer .thanks {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.bill-footer .visit-again {
+  font-size: 16px;
+}

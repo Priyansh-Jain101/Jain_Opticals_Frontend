@@ -263,6 +263,40 @@
 }
 
 
+/* Share button circle */
+.share-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin-left: auto;
+  /* position: relative;
+  left: 45%;
+  top: 15% */
+}
+
+/* Icon */
+
+/* Hover / Tap effect */
+.share-btn:hover {
+  background: #8dbae5;
+  transform: scale(1.08);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.share-btn:active {
+  transform: scale(0.95);
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .customer-data-container {
@@ -393,3 +427,5 @@
     width: 100%;
   }
 }
+
+
