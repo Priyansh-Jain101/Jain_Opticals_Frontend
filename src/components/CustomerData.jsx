@@ -87,7 +87,8 @@ function CustomerData() {
             </div>
         );
     }
-const generateAndSaveBill = async (phone_no) => {
+    
+const generateAndSaveBill = async (customer) => {
 
   const billElement = document.getElementById("bill-area");
 
@@ -106,7 +107,7 @@ const generateAndSaveBill = async (phone_no) => {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "jain-opticals-bill.png";
+    link.download = `jain-opticals-bill-${customer.name}.png`;
 
     document.body.appendChild(link);
     link.click();
@@ -117,7 +118,7 @@ const generateAndSaveBill = async (phone_no) => {
     /* Open WhatsApp after save */
     const message = "Your Billing Information";
     window.open(
-        `https://wa.me/91${phone_no}?text=${encodeURIComponent(message)}`,
+        `https://wa.me/91${customer.phone_no}?text=${encodeURIComponent(message)}`,
         "_blank"
     );
 
@@ -219,7 +220,7 @@ const generateAndSaveBill = async (phone_no) => {
                                     e.stopPropagation();
                                     setSelectedCustomer(customer);
                                     setTimeout(() => {
-                                        generateAndSaveBill(customer.phone_no);
+                                        generateAndSaveBill(customer);
                                     }, 100);
                                     }}
                                 >
