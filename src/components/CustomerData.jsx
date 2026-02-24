@@ -91,17 +91,17 @@ function CustomerData() {
         try {
 
             // Production API call
-            // const res = await fetch(`${API_URL}/jain_opticals/filter_customer`,{
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({ service })
-            //});  
-            
-            const res = await fetch("http://localhost:8080/jain_opticals/filter_customer",{
+            const res = await fetch(`${API_URL}/jain_opticals/filter_customer`,{
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ service })
-                });
+            });  
+            
+            // const res = await fetch("http://localhost:8080/jain_opticals/filter_customer",{
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ service })
+            //     });
 
             const data = await res.json();
 
