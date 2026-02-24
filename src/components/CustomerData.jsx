@@ -13,6 +13,7 @@ function CustomerData() {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchPhone, setSearchPhone] = useState("");
+    const [filterService, setFilterService] = useState("");
     const navigate = useNavigate();
 
     const[selectedCustomer, setSelectedCustomer] = useState(null);
@@ -24,11 +25,11 @@ function CustomerData() {
     async function fetchCustomers() {
         try {
             // Production API call
-            const res = await fetch(`${API_URL}/jain_opticals/customers`);
+            // const res = await fetch(`${API_URL}/jain_opticals/customers`);
 
-            // const res = await fetch("http://localhost:8080/jain_opticals/customers");
+            const res = await fetch("http://localhost:8080/jain_opticals/customers"); // contains body, header, etc other details
             if (!res.ok) throw new Error("Failed to fetch customers");
-            const data = await res.json();
+            const data = await res.json(); // reads body and parses JSON
             setCustomers(data);
             setLoading(false);
         } catch (error) {
@@ -52,19 +53,20 @@ function CustomerData() {
 
         try {
             // Production API call
-            const res = await fetch(`${API_URL}/jain_opticals/search_customer`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ phone_no: searchPhone }),
-            });
-
-            // const res = await fetch("http://localhost:8080/jain_opticals/search_customer", {
+            // const res = await fetch(`${API_URL}/jain_opticals/search_customer`, {
             // method: "POST",
             // headers: { "Content-Type": "application/json" },
             // body: JSON.stringify({ phone_no: searchPhone }),
             // });
 
+            const res = await fetch("http://localhost:8080/jain_opticals/search_customer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone_no: searchPhone }),
+            });
+
             const data = await res.json();
+            
 
             if (!res.ok) {
                 alert(data.message || "Customer not found");
@@ -77,6 +79,41 @@ function CustomerData() {
         } catch (err) {
             console.log(err);
             alert("Error searching customer");
+        }
+    }
+
+    async function handleFilter(service) {
+        if (!service) {
+            fetchCustomers(); // reset to all customers
+            return;
+        }
+
+        try {
+
+            // Production API call
+            // const res = await fetch(`${API_URL}/jain_opticals/filter_customer`,{
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ service })
+            //});  
+            
+            const res = await fetch("http://localhost:8080/jain_opticals/filter_customer",{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ service })
+                });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+            alert("No customers found for this service");
+            return;
+            }
+
+            setCustomers(data.customers);
+        } catch (err) {
+            console.error(err);
+            alert("Error filtering customers");
         }
     }
 
@@ -130,7 +167,29 @@ const generateAndSaveBill = async (customer) => {
     return (
         <>
             <div className="customer-data-container">
-                <button className="back-button" onClick={handleBack}>← Back to Home</button>
+                <div className="top-bar">
+                    <button className="back-button" onClick={handleBack}>
+                        ← Back to Home
+                    </button>
+
+                    <select
+                        className="filter-select"
+                        name="customerService"
+                        value={filterService}
+                        onChange={(e) => {
+                        const value = e.target.value;
+                        setFilterService(value);
+                        handleFilter(value);
+                        }}
+                    >
+                        <option value="">Filter Service</option>
+                        <option value="In-Progress">In-Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </div>
+
+
                 <h1 className="page-title">All Customers</h1>
 
                 {/* Search Box */}

@@ -5,6 +5,13 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
 .back-button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
@@ -21,6 +28,35 @@
 .back-button:hover {
     background-color: #cbd5e0;
     transform: translateX(-2px);
+}
+
+/* Filter select styling */
+.filter-select {
+  min-width: 180px;
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  background-color: #ffffff;
+  color: #2d3748;
+
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;          /* rectangular with smooth corners */
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.filter-select:hover {
+  border-color: #4299e1;
+}
+
+/* Focus effect (consistent with inputs) */
+.filter-select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
 }
 
 .page-title {
@@ -114,18 +150,26 @@
     border: 1px solid transparent;
 }
 
-/*  In-progress = GREEN */
+/* In Progress = BLUE */
 .service-badge.in-progress {
-    background-color: #f0fff4;
-    color: #38a169;
+    background-color: #f0fff4;   /* light green */
+    color: #2e7d32;              /* success green */
     border-color: #9ae6b4;
+
 }
 
-/*  Completed = BLUE */
+/* Completed = GREEN */
 .service-badge.completed {
-    background-color: #ebf8ff;
-    color: #3182ce;
+    background-color: #ebf8ff;   /* light blue */
+    color: #1e88e5;              /* primary blue */
     border-color: #90cdf4;
+}
+
+/* Delivered = ORANGE */
+.service-badge.delivered {
+    background-color: #fff7ed;   /* light orange */
+    color: #fb8c00;              /* delivery orange */
+    border-color: #fed7aa;
 }
 
 /*  Optional if service missing */
@@ -295,12 +339,20 @@
   transform: scale(0.95);
 }
 
-
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .customer-data-container {
         padding: 1.5rem;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .filter-select {
+        width: 100%;
     }
 
     .page-title {

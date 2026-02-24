@@ -151,6 +151,13 @@
   border-color: #93c5fd;
 }
 
+/* Delivered = ORANGE */
+.ic-badge.delivered {
+    background-color: #fff7ed;   /* light orange */
+    color: #fb8c00;              /* delivery orange */
+    border-color: #fed7aa;
+}
+
 /* default */
 .ic-badge.pending {
   background: #f3f4f6;
